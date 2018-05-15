@@ -27,6 +27,7 @@ class MainController extends Controller
         dump($posts);
 
         return $this->render('main/blog.html.twig', compact('posts'));
+            //['posts' => $posts,]);
     }
 
     /**
