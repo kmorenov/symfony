@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Post;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -23,10 +25,9 @@ class MainController extends Controller
      */
     public function blog()
     {
-        $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
-        dump($posts);
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
-        return $this->render('main/blog.html.twig', compact('posts'));
+        return $this->render('main/blog.html.twig', compact('categories'));
             //['posts' => $posts,]);
     }
 

@@ -933,35 +933,149 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="237" parent="11" name="post">
+    <table id="237" parent="11" name="category">
       <Engine>InnoDB</Engine>
       <Collation>utf8mb4_unicode_ci</Collation>
     </table>
-    <column id="238" parent="237" name="id">
+    <table id="238" parent="11" name="post">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="239" parent="11" name="post_tag">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <table id="240" parent="11" name="tag">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8mb4_unicode_ci</Collation>
+    </table>
+    <column id="241" parent="237" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="237" name="title">
+    <column id="242" parent="237" name="parent_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="243" parent="237" name="title">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="244" parent="237" name="IDX_64C19C1727ACA70">
+      <ColNames>parent_id</ColNames>
+    </index>
+    <key id="245" parent="237" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="246" parent="237" name="FK_64C19C1727ACA70">
+      <ColNames>parent_id</ColNames>
+      <RefSchemaName>symfony</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="247" parent="238" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="248" parent="238" name="title">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="237" name="content">
+    <column id="249" parent="238" name="content">
       <Position>3</Position>
       <DataType>longtext|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="241" parent="237" name="created_at">
+    <column id="250" parent="238" name="created_at">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="242" parent="237" name="PRIMARY">
+    <column id="251" parent="238" name="category_id">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="252" parent="238" name="IDX_5A8A6C8D12469DE2">
+      <ColNames>category_id</ColNames>
+    </index>
+    <key id="253" parent="238" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="254" parent="238" name="FK_5A8A6C8D12469DE2">
+      <ColNames>category_id</ColNames>
+      <RefSchemaName>symfony</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="255" parent="239" name="post_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="256" parent="239" name="tag_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="257" parent="239" name="IDX_5ACE3AF04B89032C">
+      <ColNames>post_id</ColNames>
+    </index>
+    <index id="258" parent="239" name="IDX_5ACE3AF0BAD26311">
+      <ColNames>tag_id</ColNames>
+    </index>
+    <key id="259" parent="239" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>post_id
+tag_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="260" parent="239" name="FK_5ACE3AF04B89032C">
+      <ColNames>post_id</ColNames>
+      <RefSchemaName>symfony</RefSchemaName>
+      <RefTableName>post</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="261" parent="239" name="FK_5ACE3AF0BAD26311">
+      <ColNames>tag_id</ColNames>
+      <RefSchemaName>symfony</RefSchemaName>
+      <RefTableName>tag</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="262" parent="240" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="263" parent="240" name="title">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="264" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
