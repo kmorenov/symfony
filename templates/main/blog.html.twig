@@ -10,7 +10,9 @@
     <h1> Posts ✅</h1>
 
     {% for category in categories %}
-        {% if loop.first %} {{ '{{ Not First }}' }} {% else %} {{ 'else' }} {% endif %}
+        {#
+        {% if loop.first %} {{ '{{ first }}' }} {% else %} {{ 'else' }} {% endif %}
+        #}
         <h2> {{ category.title }} ✅</h2>
         <ul>
             {% for post in category.posts %}
