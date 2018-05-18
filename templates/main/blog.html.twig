@@ -7,16 +7,18 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Posts ✅</h1>
-
+    <h1> Posts ✅</h1>
 
     {% for category in categories %}
-        <h1> {{ category.title }} ✅</h1>
+        {% if loop.first %} {{ '{{ Not First }}' }} {% else %} {{ 'else' }} {% endif %}
+        <h2> {{ category.title }} ✅</h2>
         <ul>
             {% for post in category.posts %}
                 <li><a href="{{ path('article', {'articleId' : post.id}) }}">{{ post.title }} </a></li>
             {% endfor %}
         </ul>
+        {% else %}
+            Cateories not founs!
     {% endfor %}
 </div>
 {% endblock %}

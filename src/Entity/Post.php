@@ -48,11 +48,6 @@ class Post
         $this->tags = new ArrayCollection();
     }
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", -----------------------
-     *
-     */
-
     public function getId()
     {
         return $this->id;
@@ -131,4 +126,5 @@ class Post
 
         return $this;
     }
+
 }
