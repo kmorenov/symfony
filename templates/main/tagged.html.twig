@@ -7,12 +7,18 @@
 </style>
 
 <div class="example-wrapper">
-    <h1> Posts ✅</h1>
+    <h1> Posts By Tags ✅</h1>
 
-    {% for category in categories %}
+    {% for tag in tags %}
+        <h2> {{ tag.title }} </h2>
+        <ul>
+            {% for post in tag.posts %}
+                <li><a href="{{ path('article', {'articleId' : post.id}) }}"> {{ post.title }} </a></li>
+            {% endfor %}
+        </ul>
         {#
         {% if loop.first %} {{ '{{ first }}' }} {% else %} {{ 'else' }} {% endif %}
-        #}
+
         <h2> {{ category.title }} ✅</h2>
         <ul>
             {% for post in category.posts %}
@@ -21,6 +27,7 @@
         </ul>
         {% else %}
             Cateories not found!
+        #}
     {% endfor %}
 </div>
 {% endblock %}
