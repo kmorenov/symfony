@@ -43,8 +43,14 @@ class Post
      */
     private $tags;
 
+    public function __toString()
+    {
+        return $this->title ? $this->title : 'NEW';
+    }
+
     public function __construct()
     {
+        $this->created_at = new \DateTime();
         $this->tags = new ArrayCollection();
     }
 
@@ -78,6 +84,11 @@ class Post
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function getCreated_at(): ?\DateTimeInterface
     {
         return $this->created_at;
     }

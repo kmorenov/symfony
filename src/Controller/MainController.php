@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Post;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +28,10 @@ class MainController extends Controller
     /**
      * @Route("/blog", name="blog")
      */
-    public function blog()
+    public function blog(CategoryRepository $categoryRepository)
     {
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        //$categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $categoryRepository->findAll();
 
         return $this->render('main/blog.html.twig', compact('categories'));
         //['posts' => $posts,]);
@@ -49,7 +51,7 @@ class MainController extends Controller
     /**
      * @Route("/bytag", name="tagged")
      */
-    public function tagged()//Tag $tags)
+    public function tagged()
     {
         $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
         return $this->render('main/tagged.html.twig', compact('tags'));

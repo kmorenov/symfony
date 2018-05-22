@@ -28,6 +28,11 @@ class Tag
      */
     private $posts;
 
+    public function __toString()
+    {
+        return $this->title ? $this->title : 'NEW';
+    }
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
