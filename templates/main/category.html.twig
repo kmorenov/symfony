@@ -6,10 +6,10 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-    <div class="example-wrapper">
-        <h1>Title: {{ post.title }}! ✅</h1>
-        <h2>{{post.category}}</h2>
-        {{ "\n" |nl2br}}
-        {{post.content | raw }}
-    </div>
+<div class="example-wrapper">
+    <h1>{{ category.title }} ✅</h1>
+    {{ "ID: " ~ category.id}}
+    {{ "\n Slug: "|nl2br }} {{ category.slug  }}
+
+</div>
 {% endblock %}

@@ -12,7 +12,7 @@
         <h2> {{ tag.title }} </h2>
         <ul>
             {% for post in tag.posts %}
-                <li><a href="{{ path('article', {'articleId' : post.id}) }}"> {{ post.title }} </a></li>
+                <li><a href="{{ path('articleT', {'articleId' : post.id}) }}"> {{ post.title }} </a></li>
             {% endfor %}
         </ul>
     {% endfor %}

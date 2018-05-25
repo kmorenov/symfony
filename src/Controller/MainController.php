@@ -6,15 +6,16 @@ use App\Entity\Category;
 use App\Entity\Post;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use App\Entity\Tag;
 
 
 class MainController extends Controller
 {
+
     /**
      * @Route("/", name="homepage")
      */
@@ -38,14 +39,35 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/article/{articleId}", name="article")
+     * @Route("/{categorySlug}/{postSlug}", name="article")
+     * @ParamConverter("post", options={"mapping": {"postSlug": "slug"}})
+     * @ParamConverter("category", options={"mapping": {"categorySlug": "slug"}})
      */
-    public function article($articleId)
+    public function article(Post $post, Category $category)
     {
-        $post = $this->getDoctrine()->getRepository(Post::class)->find($articleId);
+//        $post = $this->getDoctrine()->getRepository(Post::class)->find($articleId);
         return $this->render('main/article.html.twig', [
             'post' => $post,
         ]);
+    }
+
+    /*
+     * @Route("/article/{articleId}, name="articleT")
+     */
+    public function articleT($articleId){
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($articleId);
+        return $this->render('main/article.html.twig', [
+        'post' => $post,
+        ]);
+    }
+
+    /**
+     * @Route("/{categorySlug}", name="category")
+     * @ParamConverter("category", options={"mapping": {"categorySlug": "slug"}})
+     */
+    public function category(Category $category)
+    {
+        return $this->render('main/category.html.twig', ['category' => $category,]);
     }
 
     /**

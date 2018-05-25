@@ -33,6 +33,11 @@ class Category
      */
     private $parent;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __toString()
     {
         return $this->title ? $this->title : 'NEW';
@@ -99,6 +104,18 @@ class Category
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
