@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+
+use App\Service\PostManager;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +31,8 @@ class PostController extends Controller
      */
     public function new(Request $request): Response
     {
-        $post = new Post();
+    /* KM to delete
+       $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -38,12 +42,16 @@ class PostController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('post_index');
+        }*/
+        $pm  = $this->get(PostManager::class);
+        $res = $pm->createPost($request);
+
+        //if post created successfully
+        if (!$res) {
+            return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('post/new.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('post/new.html.twig', $res);
     }
 
     /**
