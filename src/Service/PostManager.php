@@ -24,8 +24,10 @@ class PostManager
     public function __construct(
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager
+//        ,MyManager $manager
         )
     {
+//        dump($manager); die;
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
     }
@@ -33,15 +35,17 @@ class PostManager
     public function createPost(Request $request)
     {
         $post = new Post();
+        return $this->editPost($request, $post);
+    }
+
+    public function editPost(Request $request, Post $post)
+    {
         $form = $this->formFactory->create(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-            $this->entityManager->persist($post); //$em->persist($post);
-            $this->entityManager->flush(); //$em->flush();
-
-            return false; //$this->redirectToRoute('post_index');
+            $this->save($post);
+            return; //$this->redirectToRoute('post_index');
         }
 
         return [
@@ -49,5 +53,13 @@ class PostManager
             'form' => $form->createView(),
         ];
 
+    }
+
+    private function save(Post $post)
+    {
+        if (!$post->getId()) {
+            $this->entityManager->persist($post);
+        }
+        $this->entityManager->flush();
     }
 }
