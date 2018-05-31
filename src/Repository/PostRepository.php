@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,7 +20,13 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-//    /**
+
+ public function getPostsByCategory(Category $category)
+ {
+
+
+ }
+ //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
     /*
