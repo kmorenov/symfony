@@ -45,25 +45,7 @@ class MainController extends Controller
         //['posts' => $posts,]);
     }
 
-    /**
-     * @Route("/bytag", name="tagged")
-     */
-    public function tagged()
-    {
-        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
-        return $this->render('main/tagged.html.twig', compact('tags'));
-    }
 
-    /**
-     * @Route("bytag/{id}", name="tag")
-     */
-    public function tag($id)
-    {
-        $tag = $this->getDoctrine()->getRepository(Tag::class)->find($id);
-        return $this->render('main/tag.html.twig', [
-            'tag' => $tag,
-        ]);
-    }
 
     /**
      * @Route("article/{categorySlug}/{postSlug}", name="article")
@@ -79,7 +61,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/{categorySlug}", name="category")
+     * @Route("cat/{categorySlug}", name="category")
      * @ParamConverter("category", options={"mapping": {"categorySlug": "slug"}})
      */
     public function category(Category $category)
@@ -99,7 +81,27 @@ class MainController extends Controller
 
     public function tags(TagRepository $repository, $place = null)
     {
-        $tags = $repository->findAll();
+        $tags = $repository->findAll(); dump($place);
         return $this->render('main/partial/tags.html.twig', compact('tags'));
+    }
+
+    /**
+     * @Route("/bytag", name="tagged")
+     */
+    public function tagged()
+    {
+        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+        return $this->render('main/tagged.html.twig', compact('tags'));
+    }
+
+    /**
+     * @Route("bytag/{id}", name="tag")
+     */
+    public function tag($id)
+    {
+        $tag = $this->getDoctrine()->getRepository(Tag::class)->find($id);
+        return $this->render('main/tag.html.twig', [
+            'tag' => $tag,
+        ]);
     }
 }
