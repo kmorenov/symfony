@@ -29,3 +29,6 @@ services:
 
     App\Service\PostManager:
       public: true
+
+    App\Service\MyManager:
+      public: true

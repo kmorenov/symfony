@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Post;
 use App\Repository\CategoryRepository;
+use App\Repository\PostRepository;
 use App\Repository\TagRepository;
 use App\Service\MyManager;
 use App\Service\PostManager;
@@ -36,11 +37,14 @@ class MainController extends Controller
     /**
      * @Route("/blog", name="blog")
      */
-    public function blog(CategoryRepository $categoryRepository)
+    public function blog(CategoryRepository $categoryRepository, PostRepository $postRepository)
     {
         //$categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $categories = $categoryRepository->findAll();
 
+        dump($postRepository->getPostsByCategory($categories[0]));
+
+//        die;
         return $this->render('main/blog.html.twig', compact('categories'));
         //['posts' => $posts,]);
     }

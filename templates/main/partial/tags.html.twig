@@ -2,5 +2,6 @@
 
 |{% for tag in tags %}
     {#{{ tag.title }}#}
-    <a href="{{ path('tagg', {'id' : tag.id}) }}">{{ tag.title }}</a> |
+    {#<a href="{{ path('tagg', {'id' : tag.id}) }}">{{ tag.title }}</a> |#}
 {% endfor %}
+{#{{ dump(app.request) }}#}

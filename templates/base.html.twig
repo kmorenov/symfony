@@ -6,7 +6,12 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    {{ render(controller('App\\Controller\\MainController::tags', {'place' : 'blog'})) }}
+    {#{{ dump(tagManager.getTagsFor('parameter')) }}#}
+    {% for tag in tagManager.tags %}
+        {#{{ tag.title }}#}
+        <a href="{{ path('tagg', {'id' : tag.id}) }}">{{ tag.title }}</a> |
+    {% endfor %}
+    {#{{ render(controller('App\\Controller\\MainController::tags', {'place' : 'blog'})) }}#}
         {% block body %}
             <div class="container">
                 {% block content %}
