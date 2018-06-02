@@ -11,5 +11,10 @@
         <h1>{{ post.title }}! ✅</h1>
         <h2>{{post.category}}</h2>
         {{post.content | raw }}
+        <br/>
+         {% for  comment in post.comments %}
+             <br/> &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content}}
+             <br/><i> {{ comment.created_at ? comment.created_at|date('Y-m-d H:i:s') : '' }}</i><br/>
+        {% endfor %}
     </div>
 {% endblock %}
