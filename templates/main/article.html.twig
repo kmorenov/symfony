@@ -13,8 +13,17 @@
         {{post.content | raw }}
         <br/>
          {% for  comment in post.comments %}
-             <br/> &nbsp;&nbsp;&nbsp;&nbsp;{{ comment.content}}
+             <br/>&nbsp&nbsp&nbsp{{"\n\n" ~ comment.content | nl2br }}
              <br/><i> {{ comment.created_at ? comment.created_at|date('Y-m-d H:i:s') : '' }}</i><br/>
         {% endfor %}
+        <form action="" method="post">
+            <div>
+                <label for="cmt">Your comment: </label>
+                <input type="text" id="cmt" name="comment" placeholder="{{ "enter your comment here" }}">
+            </div>
+            <div>
+                <button class="btn">Submit</button>
+            </div>
+        </form>
     </div>
 {% endblock %}

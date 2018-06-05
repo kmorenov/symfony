@@ -67,7 +67,10 @@ class PostController extends Controller
      */
     public function edit(Request $request, Post $post): Response
     {
+//        dump($request);
+//        dump($post);
         $form = $this->createForm(PostType::class, $post);
+//        dump($form);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
