@@ -12,18 +12,24 @@
         <h2>{{post.category}}</h2>
         {{post.content | raw }}
         <br/>
-         {% for  comment in post.comments %}
+         {% for comment in post.comments %}
              <br/>&nbsp&nbsp&nbsp{{"\n\n" ~ comment.content | nl2br }}
              <br/><i> {{ comment.created_at ? comment.created_at|date('Y-m-d H:i:s') : '' }}</i><br/>
         {% endfor %}
-        <form action="" method="post">
-            <div>
-                <label for="cmt">Your comment: </label>
-                <input type="text" id="cmt" name="comment" placeholder="{{ "enter your comment here" }}">
-            </div>
-            <div>
-                <button class="btn">Submit</button>
-            </div>
-        </form>
+        {#<form name="frm_km" action="/add" method="post">#}
+            {#<br/><br/>#}
+            {#<div>#}
+                {#<label for="cmt"><b>Add comment</b></label>#}
+                {#<input type="text" id="cmt" name="comment" placeholder="{{ "enter your comment here" }}">#}
+                {#<input type="hidden" id="post_id_id" name="post_id_id" value="{{ post.id }}">#}
+            {#</div>#}
+            {#<div>#}
+                {#<button class="btn">Submit</button>#}
+            {#</div>#}
+        {#</form>#}
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
     </div>
 {% endblock %}

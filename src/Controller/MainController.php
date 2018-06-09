@@ -16,6 +16,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use App\Entity\Tag;
 
+use App\Entity\Comment;
+use App\Form\CommentType;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+
+
+use Symfony\Component\HttpFoundation\Response;
+
+//use Symfony\Component\Form\AbstractType;
+
+use Symfony\Component\Form\Form;
 
 class MainController extends Controller
 {
@@ -49,8 +62,6 @@ class MainController extends Controller
         //['posts' => $posts,]);
     }
 
-
-
     /**
      * @Route("article/{categorySlug}/{postSlug}", name="article")
      * @ParamConverter("post", options={"mapping": {"postSlug": "slug"}})
@@ -58,10 +69,20 @@ class MainController extends Controller
      */
     public function article(Post $post, Category $category)
     {
+         $comment = new Comment(); //$task = new Task();
+            $form = $this->createFormBuilder($comment)//$task)
+            ->add('content', TextType::class)
+            ->add('post_id', TextType::class)
+            ->add('save', SubmitType::class, array('label' => 'Submit Comment'))
+                ->setAction('/add')
+            ->getForm();
+        dump($form);
+        dump($post);
+
+        return $this->render('main/article.html.twig', ['post' => $post, 'form' => $form->createView(),]);
+
+
 //        $post = $this->getDoctrine()->getRepository(Post::class)->find($articleId);
-        return $this->render('main/article.html.twig', [
-            'post' => $post,
-        ]);
     }
 
     /**
@@ -108,4 +129,6 @@ class MainController extends Controller
             'tag' => $tag,
         ]);
     }
+
+
 }

@@ -73,8 +73,18 @@ class Comment
 
     public function setPostId(?Post $post_id): self
     {
-        $this->post_id = $post_id;
+        $this->post_id_id = $post_id;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+
+        $this->content = 'auto-generated in constructor';
+
+        $this->post_id = new Post(1);
+
     }
 }
